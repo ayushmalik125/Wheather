@@ -1,3 +1,30 @@
+//___________________________________________HERO HEADLINE_________________________________________________________________
+let headline = document.getElementById("changeHeadline");
+const textLoad = () =>{
+    setTimeout(()=>{
+        headline.textContent="day";
+    },0)
+    setTimeout(()=>{
+        headline.textContent="moment";
+    },2000)
+    setTimeout(()=>{
+        headline.textContent="season";
+    },4000)
+    setTimeout(()=>{
+        headline.textContent="storm";
+    },6000)
+}
+textLoad();
+setInterval(textLoad,8000);
+
+
+
+
+
+
+
+
+
 //___________________________________________API_________________________________________________________________
 
 // let baseURL = 'http://api.weatherapi.com/v1'
@@ -84,9 +111,7 @@ const dateText = document.getElementById("date");
 dateText.textContent= `It's ${day}, ${month} ${date}.`;
 
 
-//___________________________________________HERO HEADLINE_________________________________________________________________
-let headline = document.getElementById("headline");
-headline.textContent='Be ready for every day'
+
 
 
 

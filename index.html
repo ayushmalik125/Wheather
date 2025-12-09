@@ -11,32 +11,56 @@
 <body>
     <div class="nav-bar">
         <a href="#" class="nav-bar1">
-            <img src="images/logo0.png" alt="">
+            <img src="images/logo3.png" alt="">
         </a>
         <div class="nav-bar2">
             <a href='#' class="nav-el">Home</a>
-            <a href='#' class="nav-el">Search</a>
-            <a href='#' class="nav-el">Weather</a>
-            <a href='#' class="nav-el">About</a>
-            <a href='#' class="nav-el">Contact Us</a>
+            <a href='#headline' class="nav-el">Search</a>
+            <a href='#weather' class="nav-el">Weather</a>
+            <a href='#about' class="nav-el">About</a>
+            <a href='#footer' class="nav-el">Contact Us</a>
             <a href='#' class="nav-el">Sign In</a>
         </div>
     </div>
-    <div class="hero">
+    <div id="hero" class="hero">
         <h2 id="date"></h2>
-        <h1 id="headline"></h1>
-        <div class="searchbar">
+        <h1 id="headline">Be ready for every <span id="changeHeadline">day</span></h1>
+        <div id="search" class="searchbar">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text" placeholder="Search your Address, City or Zipcode">
         </div>
     </div>
-    <div class="weather"></div>
+    <div id="weather" class="weather">
+        <h1>Weather</h1>
+    </div>
     <div class="feedback">
         <h1>Have a suggestion for us?</h1>
         <button>Fill feedback form <i class="fa-solid fa-heart"></i></button>
     </div>
-    <div class="about"></div>
-    <div class="footer">
+    <div id="about" class="about">
+        <div class="about1">
+            <div class="abouttext">
+                <h1>About Us</h1>
+                <p>The Weather Network delivers critical, timely forecasts and alerts to help you plan your day and stay safe, wherever you are. <br>We use advanced technology and a dedicated team to ensure you're ready for every weather moment, big or small.</p>
+            </div>
+            <img src="images/about0-Photoroom.png" alt="">
+        </div>
+        <div class="about2">
+            <img src="images/about1-Photoroom.png" alt="">
+            <div class="abouttext">
+                <h1>Our Vision</h1>
+                <p>We are a small team of meteorology enthusiasts and data experts committed to one goal: making sure the weather never catches you by surprise. Your safety, comfort, and ability to plan are our top priority.</p>
+            </div>
+        </div>
+        <div class="about3">
+            <div class="abouttext">
+                <h1>Our Partners</h1>
+                <p>We collaborate with national meteorological agencies, including the MetOffice and the National Oceanic and Atmospheric Administration (NOAA). We are honoured to be members of international organisations and agencies, including the World Meteorological Organisation (WMO) and the European Space Agency (ESA), as well as industry societies and associations like RMetS and HMEl.</p>
+            </div>
+            <img src="images/about3.png" alt="">
+        </div>
+    </div>
+    <div id="footer" class="footer">
         <div class="footer1">
             <ul class="company">COMPANY
                 <li>Ayush Malik™</li>
@@ -65,12 +89,12 @@
                 <li>Travel</li>
             </ul>
         </div>
-        <div class="footer2">
+        <a href="#" class="footer2">
             <i class="fa-brands fa-threads"></i>
             <i class="fa-brands fa-facebook"></i>
             <i class="fa-brands fa-instagram"></i>
             <i class="fa-brands fa-telegram"></i>
-        </div>
+        </a>
         <div class="footer3">
             The Weather Network
             <i class="fa-regular fa-copyright"></i>

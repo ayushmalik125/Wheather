@@ -4,8 +4,11 @@
     padding: 0;
     /* border: 1px solid black; */
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
-    font-family: helvetica , sans-serif;
+    font-family:"Poppins" , helvetica , sans-serif;
 }
 ul{
     list-style: none;
@@ -23,8 +26,11 @@ h1,h2,h3,h4,h5,h6,p:hover{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #f0efef90;
+    background-color: #ffffff;
     height: 5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 .nav-bar1{
     margin-left: 1rem;
@@ -42,7 +48,7 @@ h1,h2,h3,h4,h5,h6,p:hover{
     height: 100%;
 }
 .nav-el{
-    color: #aba4a6;
+    color: #5e5e5e;
     height: 100%;
     display: flex;
     align-items: center;
@@ -50,18 +56,21 @@ h1,h2,h3,h4,h5,h6,p:hover{
     padding: 0 1.5rem;
 }
 .nav-el:hover{
-    color: #656d4a;
+    color: #abc89a;
 }
 /******************************************************   HERO  **********************************************************/
 .hero{
-    height: 60vh;
+    height: 80vh;
+    
     background-image: 
         linear-gradient(
             to bottom, 
-            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0) 20%,
             rgb(255, 255, 255) 100%
         ),
-        url(images/bg-image2.jpg);
+        url(images/bg-image4.jpg);
+        position: relative;
+        top: -5rem;
     background-size:cover;
     display: flex;
     flex-direction: column;
@@ -72,9 +81,22 @@ h1,h2,h3,h4,h5,h6,p:hover{
 #date{
     font-weight: 400;
     font-size: 2rem;
+    color: white;
 }
 #headline{
     font-size: 5rem;
+    color: #ffffff
+}
+#changeHeadline{
+    color:#49573f;
+    animation-name: animation;
+    animation-iteration-count: infinite;
+    animation-duration: 2000ms;
+}
+@keyframes animation{
+    0%{opacity: 0;}
+    50%{opacity: 1;}
+    100%{opacity: 0;}
 }
 .searchbar{
     background-color: #f7f7f7;
@@ -101,8 +123,10 @@ h1,h2,h3,h4,h5,h6,p:hover{
     outline: none;
 }
 /******************************************************   WEATHER   **********************************************************/
-.weather{
-}
+/* .weather{
+    font-size: 3rem;
+    height: 100vh;
+} */
 /******************************************************   FEEDBACK   **********************************************************/
 .feedback{
     background-color: #656d4a;
@@ -135,6 +159,48 @@ h1,h2,h3,h4,h5,h6,p:hover{
     
 }
 /******************************************************   ABOUT   **********************************************************/
+.about{
+    background-image: 
+        linear-gradient(
+            to bottom, 
+            rgba(255, 255, 255, 0) 50%,
+            #333d29 100%
+        ),
+        url(/images/about-us1.jpg);
+    background-size:cover;
+    height: 220vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.about1 ,.about2, .about3{
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+.about1 img,.about2 img,.about3 img{
+   height: 110%;
+}
+.abouttext{
+    width: 40%;
+    font-size: 2rem;
+    word-spacing: 0.3rem;
+    color: #333d29;
+    
+}
+.abouttext p{
+    font-size: 1.3rem;
+    color: #656d4a;
+    line-height: 2rem;
+}
+
+
+
+
+
 /******************************************************   FOOTER   **********************************************************/
 .footer{
     display: flex;
@@ -142,10 +208,11 @@ h1,h2,h3,h4,h5,h6,p:hover{
     justify-content: space-evenly;
     align-items: center;
     height: 50vh;
-    background-color: #eae0d5;
+    background-color: #333d29;
 }
 .footer1{
     width: 100%;
+    padding-left: 8%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -156,14 +223,14 @@ h1,h2,h3,h4,h5,h6,p:hover{
     width: 20%;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #936639;
+    color: #c19569;
     cursor: default;
 }
 .footer1 ul li{
     font-weight: 200;
     text-decoration: none;
     font-size: 1.2rem;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     cursor: pointer;
     transition: color 0.3s;
 }
@@ -175,7 +242,7 @@ h1,h2,h3,h4,h5,h6,p:hover{
     font-size: 3rem;
 }
 .footer2 i{
-    color: black;
+    color: rgb(255, 255, 255);
     transition: color 0.3s;
     cursor: pointer;
 }
@@ -185,10 +252,11 @@ h1,h2,h3,h4,h5,h6,p:hover{
 }
 .footer3{
     cursor: default;
+    color: white;
 }
 .footer4{
     font-size: 2rem;
-    color: #999;
+    color: #ffffff;
     transition: color 0.5s;
 }
 .footer4:hover{
