@@ -16,7 +16,7 @@
         <div class="nav-bar2">
             <a href='#' class="nav-el">Home</a>
             <a href='#headline' class="nav-el">Search</a>
-            <a href='#weather' class="nav-el">Weather</a>
+            <a href='#search' class="nav-el">Weather</a>
             <a href='#about' class="nav-el">About</a>
             <a href='#footer' class="nav-el">Contact Us</a>
             <a href='#' class="nav-el">Sign In</a>
@@ -31,7 +31,73 @@
         </div>
     </div>
     <div id="weather" class="weather">
-        <h1>Weather</h1>
+        <h1 class="city" ><i class="fa-solid fa-location-dot"></i> <span id="city">City</span> <button id="refresh"><i class="fa-solid fa-arrows-rotate"></i></button></h1>
+        <p><span id="region">Region</span>, <span id="country">Country</span></p>
+        <h5 id="today">1st January, 2026</h3>
+        <div class="currTemp">
+            <img id="currImage" src="http://cdn.weatherapi.com/weather/64x64/night/143.png" alt="Weather_image">
+            <h1><span id="currTemp">45</span><sup>°C</sup></h1>
+            <div class="currTemp2">
+                <h5 id="currCondition">Clear</h5>
+                <p id="currFeels">Feels 40</p>
+                <p id="currHighlow">H:50  L:25</p>
+            </div>
+        </div>
+        <div class="current">
+            <h3>Current conditions</h3>
+            <ul id="currentList">
+                <li class="currentListEl">
+                    <h6>Humidity</h6>
+                    <img src="images/Humidity.png" alt="">
+                    <p class="currentListElValue">%</p>
+                </li>
+                <li class="currentListEl">
+                    <h6>AQI</h6>
+                    <img src="images/aqi.png" alt="">
+                    <p class="currentListElValue">pm2.5</p>
+                </li>
+                <li class="currentListEl">
+                    <h6>Wind speed</h6>
+                    <img src="images/wind speed.png" alt="">
+                    <p class="currentListElValue">km/h</p>
+                </li>
+                <li class="currentListEl">
+                    <h6>Pressure</h6>
+                    <img src="images/pressure.png" alt="">
+                    <p class="currentListElValue">inHg</p>
+                </li>
+                <li class="currentListEl">
+                    <h6>Visibility</h6>
+                    <img src="images/Visibility.png" alt="">
+                    <p class="currentListElValue">km</p>
+                </li>
+            </ul>
+        </div>
+        <div class="hourly">
+            <h3>Hourly Weather</h3>
+            <ul id="hourlyList">
+                <!-- <li class="hourlyListEl">
+                    <h6 class="hourlyTime">12am</h6>
+                    <img class="hourlyImg" src="" alt="Weather_img">
+                    <p class="hourlyTemp">50°</p>
+                    <p><i class="fa-solid fa-cloud-rain"></i> <span class="hourlyRain">50%</span></p>
+                </li> -->
+            </ul>
+        </div>
+        <div class="forecast">
+            <h3>14-day weather forecast</h3>
+            <ul id="forecastList">
+                <!-- <li class="forecastListEl">
+                    <p class="forecastHigh">30°</p>
+                    <i class="fa-solid fa-arrow-up-wide-short"></i>
+                    <p class="forecastLow">20°</p>
+                    <img src="" alt="Weather_img" class="forecastImg">
+                    <p class="forecastText">Clear</p>
+                    <p class="forecastDate">9th December</p>
+                </li> -->
+            </ul>
+        </div>
+
     </div>
     <div class="feedback">
         <h1>Have a suggestion for us?</h1>
