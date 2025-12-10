@@ -24,7 +24,6 @@ refreshEl.addEventListener('click', () => {
             refreshEl.classList.toggle('clicked');
         });
 
-
 //___________________________________________ HERO DATE _________________________________________________________________
 
 const dateData = new Date();
@@ -98,7 +97,7 @@ async function getForecast() {
 try {
     const res = await fetch(`${baseURL}/forecast.json?key=${key}&q=${city}&days=${days}&aqi=yes&alert=yes`);
     const data = await res.json();
-    console.log(data);
+    console.log('forecast data loaded',data);
 
     const cityNameEl=document.getElementById("city");
     const regionNameEl=document.getElementById("region");
@@ -118,11 +117,11 @@ try {
     regionNameEl.textContent=data.location.region;
     countryNameEl.textContent=data.location.country;
     dateEl.textContent= `${getdate(date)} ${getmonth(month)}, ${year}`;
-    currTempEl.textContent=data.current.temp_c;
+    currTempEl.innerHTML= (celcius==true)? data.current.temp_c+"<sup>°C</sup>":data.current.temp_f+"<sup>°F</sup>";
     currConditionEl.textContent=data.current.condition.text;
-    currFeelsEl.textContent="feels "+ data.current.feelslike_c;
-    currHighlowEl.textContent="H:"+data.forecast.forecastday[0].day.maxtemp_c + ", L:"+data.forecast.forecastday[0].day.mintemp_c ;
-    currImage.src=data.current.condition.icon;
+    currFeelsEl.textContent="Feels "+  ((celcius==true)? (data.current.feelslike_c) : (data.current.feelslike_f))  +'°';
+    currHighlowEl.textContent="H:"+((celcius==true)? (data.forecast.forecastday[0].day.maxtemp_c) : (data.forecast.forecastday[0].day.maxtemp_f)) + "°,  L:"+((celcius==true)? (data.forecast.forecastday[0].day.mintemp_c) : (data.forecast.forecastday[0].day.mintemp_f)) +'°' ;
+    currImage.src='http:'+data.current.condition.icon;
 
     currentValList[0].textContent=data.current.humidity + '%';
     currentValList[1].textContent=data.current.air_quality.pm2_5 + ' pm2.5';
@@ -134,13 +133,14 @@ try {
 
     const array=data.forecast.forecastday[0].hour;
     const hourlyList = document.getElementById("hourlyList");
+    hourlyList.innerHTML = '';
     for(let i=0;i<12;i++){
         let hourlyEl = document.createElement("li");
         hourlyEl.classList.add("hourlyListEl");
 
         hourlyEl.innerHTML = ((i==0)? `<h6 class="hourlyTime">12 AM</h6>`:`<h6 class="hourlyTime">${i} AM</h6>`)+
-                    `<img class="hourlyImg" src="${array[i].condition.icon}" alt="Weather_img">
-                    <p class="hourlyTemp">${array[i].temp_c}°</p>
+                    `<img class="hourlyImg" src="http:${array[i].condition.icon}" alt="Weather_img">
+                    <p class="hourlyTemp">${ (celcius==true)? array[i].temp_c : array[i].temp_f}°</p>
                     <p><i class="fa-solid fa-cloud-rain"></i> <span class="hourlyRain">${array[i].chance_of_rain}%</span></p>`;
         hourlyList.appendChild(hourlyEl);
     }
@@ -149,8 +149,8 @@ try {
         hourlyEl.classList.add("hourlyListEl");
 
         hourlyEl.innerHTML = ((i==12)? `<h6 class="hourlyTime">12 PM</h6>`:`<h6 class="hourlyTime">${i-12} PM</h6>`)+
-                    `<img class="hourlyImg" src="${array[i].condition.icon}" alt="Weather_img">
-                    <p class="hourlyTemp">${array[i].temp_c}°</p>
+                    `<img class="hourlyImg" src="http:${array[i].condition.icon}" alt="Weather_img">
+                    <p class="hourlyTemp">${ (celcius==true)? array[i].temp_c : array[i].temp_f}°</p>
                     <p><i class="fa-solid fa-cloud-rain"></i> <span class="hourlyRain">${array[i].chance_of_rain}%</span></p>`;
         hourlyList.appendChild(hourlyEl);
     }
@@ -158,53 +158,154 @@ try {
 
 
 
-    console.log(data.forecast.forecastday);
     
     const Array=data.forecast.forecastday;
     const forecastList = document.getElementById("forecastList");
+    forecastList.innerHTML = '';
     for(let i=0;i<14;i++){
         let fDate=getdate(Array[i].date.slice(8));
         let fmonth=getmonth(Array[i].date.slice(5,7)-1);
         let forecastEl = document.createElement("li");
         forecastEl.classList.add("forecastListEl");
-        forecastEl.innerHTML =`<p class="forecastHigh">${Array[i].day.maxtemp_c}°</p>
+        forecastEl.innerHTML =`<p class="forecastHigh">${ (celcius==true)? Array[i].day.maxtemp_c : Array[i].day.maxtemp_f}°</p>
                     <i class="fa-solid fa-arrow-up-wide-short"></i>
-                    <p class="forecastLow">${Array[i].day.mintemp_c}°</p>
-                    <img src="${Array[i].day.condition.icon}" alt="weather_img" class="forecastImg">
+                    <p class="forecastLow">${ (celcius==true)? Array[i].day.mintemp_c : Array[i].day.mintemp_f}°</p>
+                    <img src="http:${Array[i].day.condition.icon}" alt="weather_img" class="forecastImg">
                     <p class="forecastText">${Array[i].day.condition.text}</p>
                     <p class="forecastDate">${  fDate[0]=='0'? fDate.slice(1) : fDate} ${fmonth}</p>`;
         forecastList.appendChild(forecastEl);
     }
 
-
-
-
 } catch (err) {
     console.error(err);
 }
 }
 
-async function getSearch() {
-try {
-    const res = await fetch(`${baseURL}/search.json?key=${key}&q=${search}`);
-    const data = await res.json();
-    console.log('search',data);
-} catch (err) {
-    console.error(err);
-}
-}
+
+
+
+
+
+
+
+//___________________________________________ CELCIUS-FARHENIET _________________________________________________________________
+const celFer = document.getElementById("celFer");
+let celcius =true;
+celFer.addEventListener('click',() =>{
+    celcius=!celcius;
+    getForecast();
+    if(celcius==true){celFer.textContent="Change to °F?";}
+    else{celFer.textContent="Change to °C?";}
+})
+
+
+
 
 //___________________________________________Weather_________________________________________________________________
 
 //Initially
-let city='New Delhi';
-getForecast();
+let city='new york';
+window.addEventListener('load', () => {
+    getForecast();
+});
+
+//___________________________________________  Search    _________________________________________________________________
+
+
+// let search='c';
+
+document.getElementById("searchOptions").innerHTML='';
+
+let searchEl = document.getElementById("searchInput");
+searchEl.addEventListener('input', (event) => getSearch(event));
+searchEl.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        getSearch(event);
+    }
+});
 
 
 
+async function getSearch(event) {
+try {
+    let search = document.getElementById("searchInput").value;
+    const searchOptions=document.getElementById("searchOptions");
+
+    // if input is empty don't run ahead
+    if(!search){
+       searchOptions.innerHTML='';
+        if(event.key==='Enter'){
+            //PLEASE ENTER SOMETHING
+            console.log('plz enter somthng before pressing enter');
+            searchOptions.innerHTML = '<li class="searchWarning">Please enter something.</li>';
+            // console.log('plz enter somthng before pressing enter key');
+        }
+        else{console.log('input cleared')}
+        return;
+    }
+
+    
+    //IF ENTER IS PRESSED
+    if(event.key === 'Enter'){
+        const results = document.getElementsByClassName("searchEl");
+        if(results.length > 0){
+            let location = results[0].textContent;
+            city = location.split(',')[0].trim();
+            getForecast();
+            document.getElementById("weather").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+            searchOptions.innerHTML='';
+            document.getElementById("searchInput").value='';
+            return;
+        }
+        else{
+            searchOptions.innerHTML = '<li class="searchWarning">No match found.</li>';
+            return;
+        }
+    }
+    
+    searchOptions.innerHTML='';
+
+
+    const res = await fetch(`${baseURL}/search.json?key=${key}&q=${search}`);
+    const data = await res.json();
+    console.log('matching cities array',data);
+
+    for(let i=0;i<data.length;i++){
+        let newSearchOption=document.createElement("li");
+        newSearchOption.classList.add("searchEl");
+        newSearchOption.innerHTML= `${data[i].name},${data[i].region}, ${data[i].country}`;
+        searchOptions.appendChild(newSearchOption);
+    }
 
 
 
+    //IF ONE OF THE OPTIONS IS CLICKED
+    NewSearchList=document.getElementsByClassName("searchEl");
+    if(NewSearchList.length===0){
+        searchOptions.innerHTML = '<li class="searchWarning">No match found.</li>';
+        return;
+    }
+    for(let i=0; i<NewSearchList.length && i<5 ;i++){
+        NewSearchList[i].addEventListener('click',()=>{
+            city=data[i].name;
+            getForecast();
+            document.getElementById("weather").scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+        });
+    }
+    
+
+
+} catch (err) {
+    console.error(err);
+}
+}
 
 
     

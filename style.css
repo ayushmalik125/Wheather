@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* border: 1px solid black; */
+    /* border: 1px solid red; */
 }
 html{
     scroll-behavior: smooth;
@@ -77,7 +77,7 @@ h1,h2,h3,h4,h5,h6,p:hover{
     background-size:cover;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-evenly;
     padding-left: 3rem;
 }
@@ -92,6 +92,8 @@ h1,h2,h3,h4,h5,h6,p:hover{
     font-size: 5rem;
     color: #ffffff;
     text-shadow: 1px 1px black;
+    align-self: flex-start;
+    margin-left: 20%;
 }
 #changeHeadline{
     color:#49573f;
@@ -99,14 +101,26 @@ h1,h2,h3,h4,h5,h6,p:hover{
     animation-iteration-count: infinite;
     animation-duration: 2000ms; */
 }
-@keyframes animation{
+/* @keyframes animation{
     0%{opacity: 0;}
     50%{opacity: 1;}
     100%{opacity: 0;}
+} */
+
+.search{
+    /* border: 2px solid red; */
+    width: 70rem;
+    height: 20rem;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
 }
+
 .searchbar{
+    /* border: 2px solid blue; */
     background-color: #f7f7f7;
-    border-radius: 4%/50%;
+    border-radius: 4rem;
     height: 4rem;
     width: 70rem;
     display: flex;
@@ -121,13 +135,51 @@ h1,h2,h3,h4,h5,h6,p:hover{
 .searchbar input{
     height: 100%;
     width:85%;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     border: 0;
     font-size: 1.2rem;
 }
 .searchbar input:focus {
     outline: none;
 }
+#searchOptions{
+    /* border: 2px solid green; */
+    width: 97%;
+    height: auto;
+}
+.searchEl{
+    height: 3rem;
+    width: 100%;
+    background-color: #ffffff2d;
+    font-size: 1.5rem;
+    padding: 0.75rem 3rem;
+    color: rgb(66, 66, 66);
+    border: 0.5px solid rgb(255, 255, 255);
+    /* border-top: 0; */
+    border-radius: 3rem;
+    transition: background-color 0.2s;
+}
+.searchEl:hover{
+    background-color: #ffffffab;
+    cursor: pointer;
+}
+.searchWarning{
+    height: 3rem;
+    width: 100%;
+    background-color: #ff7e7e34;
+    font-size: 1.5rem;
+    padding: 0.75rem 3rem;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 3rem;
+    transition: background-color 0.2s;
+}
+.searchWarning:hover{
+    background-color: #ff7e7e79;
+    cursor: pointer;
+}
+
+
 /******************************************************   WEATHER   **********************************************************/
 .weather{
     font-size: 2rem;
@@ -137,9 +189,9 @@ h1,h2,h3,h4,h5,h6,p:hover{
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-image: url(images/background.webp);
-    background-size: cover;
-    padding-top: 5rem;
+    background-image: url(images/background.jpg);
+    background-size:cover;
+    padding-top: 10rem;
 }
 .fa-location-dot{
     color: #f5bc03;
@@ -167,23 +219,45 @@ h1,h2,h3,h4,h5,h6,p:hover{
     margin-bottom: 2rem;
 }
 .currTemp{
-    background-color: rgba(203, 203, 203, 0.261);
-    width: 35rem;
+    background-color: rgba(255, 255, 255, 0.283);
+    width: 38rem;
     height: 12rem;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    border-radius: 6%/18%;
-    box-shadow: 0px 0px 15px gray;
+    border-radius: 5rem;
+    box-shadow: 0px 0px 15px rgba(128, 128, 128, 0.225);
     transition: box-shadow,transform 0.3s ;
-    margin-bottom: 5rem;
+}
+.currTemp img{
+    width:100px
 }
 .currTemp h1{
     font-weight: 2000;
-    font-size: 5rem;
+    font-size: 4rem;
 }
-
+.currTemp2 h5{
+    font-size: 1.8rem;
+}
+.currTemp2 p{
+    font-size: 1.3rem;
+}
+#celFer{
+    padding:0.7rem 1.4rem;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+    background-color: rgba(255, 255, 255, 0.283);
+    border: none;
+    box-shadow: 0px 0px 15px rgba(128, 128, 128, 0.225);
+    border-radius: 2rem;
+    transition: box-shadow,transform 0.3s ;
+    font-size: 1.2rem;
+}
+#celFer:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 30px rgba(162, 162, 162, 0.514);
+}
 /******************************************************   CURRENT CONDITIONS   **********************************************************/
 
 .current{
@@ -212,22 +286,25 @@ h1,h2,h3,h4,h5,h6,p:hover{
 .currentListEl{
     height:100%;
     width:15rem;
-    background-color: white;
-    border-radius: 10%;
+    background-color: rgba(255, 255, 255, 0.503);
+    border-radius: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0px 0px 10px gray;
+    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.481);
     transition: box-shadow,transform 0.3s ;
 }
 .currentListEl:hover , .currTemp:hover , .hourlyListEl:hover , .forecastListEl:hover{
     transform: scale(1.1);
-    box-shadow: 0px 0px 30px rgb(162, 162, 162);
+    box-shadow: 0px 0px 30px rgba(162, 162, 162, 0.514);
 }
 .currentListEl img{
     max-width: 80%;
     max-height: 50%;
+}
+.currentListEl .currentListElValue{
+    font-size: 1.2rem;
 }
 
 /******************************************************   HOURLY  **********************************************************/
@@ -251,22 +328,28 @@ h1,h2,h3,h4,h5,h6,p:hover{
     align-items: center;
     height: 85%;
     width: 80vw;
-    scrollbar-gutter: stable;
     overflow-x: auto;
     overflow-y: hidden;
     padding-bottom: 10px;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scrollbar-gutter: auto;
+}
+#hourlyList::-webkit-scrollbar{
+    display: none;
 }
 .hourlyListEl{
     height:70%;
     width:7rem;
     margin: 0 0.8rem;
-    background-color: white;
-    border-radius: 10%/5%;
+    background-color: rgba(255, 255, 255, 0.324);
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    box-shadow: 0px 0px 10px gray;
+    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.5);
     transition: box-shadow,transform 0.3s ;
     z-index: 1;
     flex-shrink: 0;
@@ -304,18 +387,25 @@ h1,h2,h3,h4,h5,h6,p:hover{
     overflow-x: auto;
     overflow-y: hidden;
     padding-bottom: 10px;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scrollbar-gutter: auto;
+}
+#forecastList::-webkit-scrollbar{
+    display: none;
 }
 .forecastListEl{
     height:75%;
     width:12rem;
     margin: 0 0.8rem;
-    background-color: white;
-    border-radius: 10%/5%;
+    background-color: rgba(255, 255, 255, 0.491);
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    box-shadow: 0px 0px 10px gray;
+    box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.469);
     transition: box-shadow,transform 0.3s ;
     z-index: 1;
     flex-shrink: 0;
@@ -364,7 +454,7 @@ h1,h2,h3,h4,h5,h6,p:hover{
             rgba(255, 255, 255, 0) 50%,
             #333d29 100%
         ),
-        url(/images/about-us1.jpg);
+        url(images/about-us1.jpg);
     background-size:cover;
     height: 220vh;
     display: flex;

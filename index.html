@@ -16,7 +16,7 @@
         <div class="nav-bar2">
             <a href='#' class="nav-el">Home</a>
             <a href='#headline' class="nav-el">Search</a>
-            <a href='#search' class="nav-el">Weather</a>
+            <a href='#weather' class="nav-el">Weather</a>
             <a href='#about' class="nav-el">About</a>
             <a href='#footer' class="nav-el">Contact Us</a>
             <a href='#' class="nav-el">Sign In</a>
@@ -25,9 +25,18 @@
     <div id="hero" class="hero">
         <h2 id="date"></h2>
         <h1 id="headline">Be ready for every <span id="changeHeadline">day</span></h1>
-        <div id="search" class="searchbar">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Search your Address, City or Zipcode">
+        <div class="search">
+            <div id="search" class="searchbar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" placeholder="Search your Address, City or Zipcode" value="" id="searchInput">
+            </div>
+            <ul id="searchOptions">
+                <!-- <li class="searchEl">New Delhi, Delhi, India</li>
+                <li class="searchEl">New Delhi, Delhi, India</li>
+                <li class="searchEl">New Delhi, Delhi, India</li>
+                <li class="searchEl">New Delhi, Delhi, India</li>
+                <li class="searchEl">New Delhi, Delhi, India</li> -->
+            </ul>
         </div>
     </div>
     <div id="weather" class="weather">
@@ -35,14 +44,15 @@
         <p><span id="region">Region</span>, <span id="country">Country</span></p>
         <h5 id="today">1st January, 2026</h3>
         <div class="currTemp">
-            <img id="currImage" src="http://cdn.weatherapi.com/weather/64x64/night/143.png" alt="Weather_image">
-            <h1><span id="currTemp">45</span><sup>°C</sup></h1>
+            <img id="currImage" src="//cdn.weatherapi.com/weather/64x64/night/143.png" alt="Weather_image">
+            <h1 id="currTemp">45<sup>°C</sup></h1>
             <div class="currTemp2">
                 <h5 id="currCondition">Clear</h5>
                 <p id="currFeels">Feels 40</p>
                 <p id="currHighlow">H:50  L:25</p>
             </div>
         </div>
+        <button id="celFer">Change to °F?</button>
         <div class="current">
             <h3>Current conditions</h3>
             <ul id="currentList">
