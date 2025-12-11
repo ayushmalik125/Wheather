@@ -129,7 +129,7 @@ dateText.textContent= `It's ${getday(day)}, ${getmonth(month)} ${getdate(date)}.
 
 //___________________________________________API_________________________________________________________________
 
-const baseURL = 'http://api.weatherapi.com/v1'
+const baseURL = 'https://api.weatherapi.com/v1'
 const key = '2cab48709326470f96651918250812'
 const days = 14
 
@@ -164,7 +164,7 @@ try {
     currConditionEl.textContent=data.current.condition.text;
     currFeelsEl.textContent="Feels "+  ((celcius==true)? (data.current.feelslike_c) : (data.current.feelslike_f))  +'°';
     currHighlowEl.textContent="H:"+((celcius==true)? (data.forecast.forecastday[0].day.maxtemp_c) : (data.forecast.forecastday[0].day.maxtemp_f)) + "°,  L:"+((celcius==true)? (data.forecast.forecastday[0].day.mintemp_c) : (data.forecast.forecastday[0].day.mintemp_f)) +'°' ;
-    currImage.src='http:'+data.current.condition.icon;
+    currImage.src='https:'+data.current.condition.icon;
 
     currentValList[0].textContent=data.current.humidity + '%';
     currentValList[1].textContent=data.current.air_quality.pm2_5 + ' pm2.5';
@@ -195,7 +195,7 @@ try {
         hourlyEl.classList.add("hourlyListEl");
 
         hourlyEl.innerHTML = ((i==0)? `<h6 class="hourlyTime">12 AM</h6>`:`<h6 class="hourlyTime">${i} AM</h6>`)+
-                    `<img class="hourlyImg" src="http:${array[i].condition.icon}" alt="Weather_img">
+                    `<img class="hourlyImg" src="https:${array[i].condition.icon}" alt="Weather_img">
                     <p class="hourlyTemp">${ (celcius==true)? array[i].temp_c : array[i].temp_f}°</p>
                     <p><i class="fa-solid fa-cloud-rain"></i> <span class="hourlyRain">${array[i].chance_of_rain}%</span></p>`;
         hourlyList.appendChild(hourlyEl);
@@ -205,7 +205,7 @@ try {
         hourlyEl.classList.add("hourlyListEl");
 
         hourlyEl.innerHTML = ((i==12)? `<h6 class="hourlyTime">12 PM</h6>`:`<h6 class="hourlyTime">${i-12} PM</h6>`)+
-                    `<img class="hourlyImg" src="http:${array[i].condition.icon}" alt="Weather_img">
+                    `<img class="hourlyImg" src="https:${array[i].condition.icon}" alt="Weather_img">
                     <p class="hourlyTemp">${ (celcius==true)? array[i].temp_c : array[i].temp_f}°</p>
                     <p><i class="fa-solid fa-cloud-rain"></i> <span class="hourlyRain">${array[i].chance_of_rain}%</span></p>`;
         hourlyList.appendChild(hourlyEl);
@@ -226,7 +226,7 @@ try {
         forecastEl.innerHTML =`<p class="forecastHigh">${ (celcius==true)? Array[i].day.maxtemp_c : Array[i].day.maxtemp_f}°</p>
                     <i class="fa-solid fa-arrow-up-wide-short"></i>
                     <p class="forecastLow">${ (celcius==true)? Array[i].day.mintemp_c : Array[i].day.mintemp_f}°</p>
-                    <img src="http:${Array[i].day.condition.icon}" alt="weather_img" class="forecastImg">
+                    <img src="https:${Array[i].day.condition.icon}" alt="weather_img" class="forecastImg">
                     <p class="forecastText">${Array[i].day.condition.text}</p>
                     <p class="forecastDate">${  fDate[0]=='0'? fDate.slice(1) : fDate} ${fmonth}</p>`;
         forecastList.appendChild(forecastEl);
