@@ -282,6 +282,7 @@ h1,h2,h3,h4,h5,h6,p:hover{
     color: var(--color2);
     margin-top: 1rem;
     margin-bottom: 2rem;
+    text-align: center;
 }
 .currTemp{
     background-color: rgba(255, 255, 255, 0);
@@ -309,7 +310,7 @@ h1,h2,h3,h4,h5,h6,p:hover{
 .currTemp2 p{
     font-size: 1.3rem;
 }
-#celFer ,#favBtn{
+#celFer ,#favBtn ,#favList,#favRemoveBtn{
     padding:0.7rem 1.4rem;
     margin-top: 1rem;
     background-color: rgba(255, 255, 255, 0);
@@ -321,10 +322,29 @@ h1,h2,h3,h4,h5,h6,p:hover{
     color: var(--color1);
     backdrop-filter: blur(10px);
 }
-body #favBtn{
+/* body #favBtn{
+    margin-bottom: 1rem;
+} */
+#favList{
+    display: flex;
+    flex-direction: row;
     margin-bottom: 5rem;
+    /* height: 50px; */
+    /* width: 100%; */
+    font-size: 1.5rem;
+    align-items: center;
 }
-#celFer:hover{
+#favList li{
+    /* display: inline-block; */
+    margin-left: 2rem;
+    color: rgb(160, 160, 160);
+}
+#favList li:hover{
+    color: rgb(255, 0, 0);
+    text-decoration: underline solid rgb(255, 255, 255) 3px;
+    cursor: pointer;
+}
+#celFer:hover ,#favList:hover , #favBtn:hover ,#favRemoveBtn:hover{
     transform: scale(1.1);
     box-shadow: 0px 0px 30px rgba(162, 162, 162, 0.514);
 }

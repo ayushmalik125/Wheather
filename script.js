@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(userStr){
         //logged in
         const user = JSON.parse(userStr);
+        console.log('user data',user);
         document.getElementsByClassName("nav-el")[5].textContent='Sign out';
         document.getElementsByClassName("nav-el")[5].href='login.html';
         document.getElementById("message").innerText=`Welcome, ${user.fname}`;
@@ -164,7 +165,7 @@ const days = 14
 
 async function getForecast() {
 try {
-    const res = await fetch(`${baseURL}/forecast.json?key=${key}&q=${city}&days=${days}&aqi=yes&alert=yes`);
+    const res = await fetch(`${baseURL}/forecast.json?key=${key}&q=${city}&days=${days}&aqi=yes&alert=no`);
     const data = await res.json();
     console.log('forecast data loaded',data);
 
@@ -185,7 +186,8 @@ try {
     cityNameEl.textContent=data.location.name;
     regionNameEl.textContent=data.location.region;
     countryNameEl.textContent=data.location.country;
-    dateEl.textContent= `${getdate(date)} ${getmonth(month)}, ${year}`;
+    // dateEl.textContent= `${getdate(data.location.localtime.slice(8,10))} ${getmonth(data.location.localtime.slice(5,7)-1)}, ${data.location.localtime.slice(0,4)}`;
+    dateEl.innerHTML= `${getdate(data.location.localtime.slice(8,10))} ${getmonth(data.location.localtime.slice(5,7)-1)}, ${data.location.localtime.slice(0,4)}<br>Local Time : ${data.location.localtime.slice(11,16)}`;
     currTempEl.innerHTML= (celcius==true)? data.current.temp_c+"<sup>°C</sup>":data.current.temp_f+"<sup>°F</sup>";
     currConditionEl.textContent=data.current.condition.text;
     currFeelsEl.textContent="Feels "+  ((celcius==true)? (data.current.feelslike_c) : (data.current.feelslike_f))  +'°';
@@ -286,10 +288,100 @@ celFer.addEventListener('click',() =>{
 //___________________________________________Weather_________________________________________________________________
 
 //Initially
-let city='new york';
+let city='Kharagpur';
 window.addEventListener('load', () => {
     getForecast();
 });
+
+
+//___________________________________________ FAVOURITES _________________________________________________________________
+const trending = ['Kharagpur','New Delhi','Kolkata'];
+const userStr = localStorage.getItem('currentUser');
+const favBtn = document.getElementById("favBtn");
+const favRemoveBtn = document.getElementById("favRemoveBtn");
+
+document.getElementById('favList').innerHTML='<i class="fa-solid fa-heart" style="color: red;"></i>Cities:';
+if(userStr){
+    //loggedin
+    const user=JSON.parse(userStr);
+    for(let favCity of user.prefrences){
+        let favCityEl=document.createElement('li');
+        favCityEl.textContent=favCity;
+        document.getElementById('favList').appendChild(favCityEl);
+        favCityEl.addEventListener('click',()=>{
+            city=favCityEl.textContent;
+            getForecast();
+            scrollWeather();
+        })
+    }
+
+
+
+    favBtn.addEventListener('click',()=>{
+        if(user.prefrences.includes(city)){
+            alert( city+" is already saved.");
+        }
+        else{
+            user.prefrences.push(city);
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            let favCityEl=document.createElement('li');
+            favCityEl.textContent=city;
+            document.getElementById('favList').appendChild(favCityEl);
+            favCityEl.addEventListener('click',()=>{
+                city=favCityEl.textContent;
+                getForecast();
+                scrollWeather();
+            })
+        }
+    })
+
+
+
+    favRemoveBtn.addEventListener('click',()=>{
+        if(user.prefrences.includes(city)){
+            user.prefrences.splice(user.prefrences.indexOf(city),1);
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            const li = [...document.querySelectorAll('#favList li')].find(el => el.textContent === city);
+            if(li){ li.remove();}
+        }
+        else{
+            alert( city+" is already not saved.");
+        }
+    })
+    
+}
+
+
+
+else{
+    //loggedout
+    document.getElementById('favList').innerHTML='<i class="fa-solid fa-location-arrow"></i> Famous Cities: ';
+
+    for(let favCity of trending){
+        let favCityEl=document.createElement('li');
+        favCityEl.textContent=favCity;
+        document.getElementById('favList').appendChild(favCityEl);
+        favCityEl.addEventListener('click',()=>{
+            city=favCityEl.textContent;
+            getForecast();
+            scrollWeather();
+        })
+    }
+
+
+
+    favBtn.addEventListener('click',()=>{
+        alert("Please login to save.");
+    })
+
+
+
+    favRemoveBtn.addEventListener('click',()=>{
+        alert("Please login to save.");
+    })
+}
+
+
 
 //___________________________________________  Search    _________________________________________________________________
 
@@ -373,7 +465,7 @@ try {
     }
     for(let i=0; i<NewSearchList.length && i<5 ;i++){
         NewSearchList[i].addEventListener('click',()=>{
-            city=data[i].name;
+            city = NewSearchList[i].textContent.split(',')[0].trim();
             getForecast();
             document.getElementById("weather").scrollIntoView({
                 behavior:"smooth",
