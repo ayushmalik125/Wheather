@@ -63,7 +63,8 @@ formEl.addEventListener('submit',(e)=>{
             fname:fname,
             email:email,
             encryptedpassword:encryptedpassword,
-            prefrences:[]
+            prefrences:[],
+            recent:[]
         }
         localStorage.setItem(email,JSON.stringify(user));
         alert('Signup Successful.You can now login.');

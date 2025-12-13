@@ -196,14 +196,12 @@ h1,h2,h3,h4,h5,h6,p:hover{
     align-items: center;
 }
 .searchbar i{
-    width: 50px;
-    padding-left: 10px;
-    padding-right: 10px;
+    width: 60px;
     font-size: 1.5rem;
 }
 .searchbar input{
     height: 100%;
-    width:85%;
+    flex: 1;
     background-color: rgba(0, 0, 0, 0);
     border: 0;
     font-size: 1.2rem;
@@ -238,7 +236,7 @@ h1,h2,h3,h4,h5,h6,p:hover{
     width: 100%;
     background-color: #ff7e7e34;
     font-size: 1.5rem;
-    padding: 0.75rem 3rem;
+    padding: 0.3rem 3rem;
     color: rgb(255, 255, 255);
     margin-top: 0.5rem;
     border: 1px solid rgb(255, 255, 255);
@@ -249,6 +247,31 @@ h1,h2,h3,h4,h5,h6,p:hover{
     background-color: #ff7e7e79;
     cursor: pointer;
 }
+#recentList{
+    padding:0.7rem 1.4rem;
+    margin-top: 1rem;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    box-shadow: 0px 0px 15px rgba(128, 128, 128, 0.5);
+    border-radius: 2rem;
+    transition: box-shadow,transform 0.3s ;
+    font-size: 1.2rem;
+    color: var(--color1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: row;
+}
+.recent{
+    /* display: inline-block; */
+    margin-left: 2rem;
+    color: rgb(160, 160, 160);
+}
+.recent:hover{
+    color: rgb(255, 0, 0);
+    text-decoration: underline solid rgb(255, 255, 255) 3px;
+    cursor: pointer;
+}
+
 @media screen and (max-width:800px) {
     #date{
         font-size: 6vw;
@@ -448,6 +471,9 @@ h1,h2,h3,h4,h5,h6,p:hover{
         width: 80%;
         height: 8rem;
     }
+    #favList{
+        font-size: 1rem;
+    }
 }
 @media screen and (max-width:500px) {
     
@@ -460,13 +486,16 @@ h1,h2,h3,h4,h5,h6,p:hover{
     .currTemp2 p{
         font-size: 0.7rem;
     }
+    #favList{
+        font-size: 0.6rem;
+    }
 }
 
 /******************************************************   CURRENT CONDITIONS   **********************************************************/
 
 .current{
     /* border: 2px solid black; */
-    height: 33vh;
+    height: 35vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -484,7 +513,8 @@ h1,h2,h3,h4,h5,h6,p:hover{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 70%;
+    /* height: 55%; */
+    padding: 10px 0;
     width: 80vw;
 
     -ms-overflow-style: none;
