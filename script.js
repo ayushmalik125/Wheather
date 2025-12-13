@@ -400,8 +400,15 @@ else{
 
 document.getElementById("searchOptions").innerHTML='';
 
+
+let searchController = null;
+let searchDebounceTimer = null;
+
 let searchEl = document.getElementById("searchInput");
-searchEl.addEventListener('input', (event) => getSearch(event));
+searchEl.addEventListener('input', (event) => {
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(() => getSearch(event), 300);
+});
 searchEl.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         event.preventDefault();
@@ -413,6 +420,12 @@ searchEl.addEventListener('keydown', (event) => {
 
 async function getSearch(event) {
 try {
+    // cancel previous search request if still pending
+    if (searchController) {
+        searchController.abort();
+    }
+    searchController = new AbortController();
+
     let search = document.getElementById("searchInput").value;
     const searchOptions=document.getElementById("searchOptions");
 
@@ -454,7 +467,10 @@ try {
     searchOptions.innerHTML='';
 
 
-    const res = await fetch(`${baseURL}/search.json?key=${key}&q=${search}`);
+    const res = await fetch(
+        `${baseURL}/search.json?key=${key}&q=${search}`,
+        { signal: searchController.signal }
+    );
     const data = await res.json();
     console.log('matching cities array',data);
 
@@ -487,7 +503,9 @@ try {
 
 
 } catch (err) {
-    console.error(err);
+    if (err.name !== 'AbortError') {
+        console.error(err);
+    }
 }
 }
 
