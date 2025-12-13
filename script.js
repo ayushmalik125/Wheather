@@ -267,6 +267,9 @@ try {
         forecastList.appendChild(forecastEl);
     }
 
+
+
+    addRecent(city);
 } catch (err) {
     console.error(err);
 }
@@ -489,4 +492,63 @@ try {
 }
 
 
+
+//___________________________________________  recent    _________________________________________________________________
+
+const recentList=document.getElementById('recentList');
+recentList.innerHTML='Recents:';
+let user=JSON.parse(localStorage.getItem('currentUser'));
+
+if(user){
+    for(c of user.recent){    //INITIALLY LOAD FROM LOCAL
+        let recentCityEl=document.createElement('li');
+        recentCityEl.textContent=c;
+        recentCityEl.classList.add('recent');
+        if(document.getElementsByClassName('recent').length===0){
+            recentList.appendChild(recentCityEl);
+        }
+        else if(document.getElementsByClassName('recent').length<5){
+            const lastRecentCityEl=document.getElementsByClassName('recent')[0];
+            recentList.insertBefore(recentCityEl,lastRecentCityEl);
+        }
+        recentCityEl.addEventListener('click',()=>{
+            city=recentCityEl.textContent;
+            getForecast();
+            scrollWeather();
+        })
+    }
+}
+
+
+function addRecent(recentCity){
+    const recentCityEl=document.createElement('li');
+    recentCityEl.textContent=recentCity;
     
+    if(document.getElementsByClassName('recent').length===0){
+        recentCityEl.classList.add('recent');
+        recentList.appendChild(recentCityEl);
+        if(user){user.recent.unshift(recentCity);}
+    }
+    else if(document.getElementsByClassName('recent').length<5){
+        const lastRecentCityEl=document.getElementsByClassName('recent')[0];
+        recentCityEl.classList.add('recent');
+        recentList.insertBefore(recentCityEl,lastRecentCityEl);
+        if(user){user.recent.unshift(recentCity);}
+    }
+    else{
+        const lastRecentCityEl=document.getElementsByClassName('recent')[0];
+        recentList.insertBefore(recentCityEl,lastRecentCityEl);
+        recentCityEl.classList.add('recent');
+        recentList.lastElementChild.remove();
+        if(user){
+            user.recent.pop();
+            user.recent.unshift(recentCity);}
+    }
+    if(user){localStorage.setItem('currentUser',JSON.stringify(user));}
+    
+    recentCityEl.addEventListener('click',()=>{
+        city=recentCityEl.textContent;
+        getForecast();
+        scrollWeather();
+    })
+}
